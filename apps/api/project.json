@@ -1,0 +1,52 @@
+{
+    "name": "api",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "application",
+    "sourceRoot": "apps/api",
+    "targets": {
+        "setup-env": {
+            "executor": "@nx/js:run-commands",
+            "options": {
+                "command": "uv venv && uv pip sync requirements.txt",
+                "cwd": "apps/api"
+            },
+            "outputs": [
+                "{options.cwd}/.venv"
+            ]
+        },
+        "serve": {
+            "executor": "@nx/js:run-commands",
+            "options": {
+                "command": "uv run uvicorn main:app --host 0.0.0.0 --port 8000 --reload",
+                "cwd": "apps/api"
+            },
+            "dependsOn": [
+                "setup-env"
+            ]
+        },
+        "lint": {
+            "executor": "@nx/js:run-commands",
+            "options": {
+                "command": "uv run ruff check .",
+                "cwd": "apps/api"
+            },
+            "dependsOn": [
+                "setup-env"
+            ]
+        },
+        "test": {
+            "executor": "@nx/js:run-commands",
+            "options": {
+                "command": "uv run pytest",
+                "cwd": "apps/api"
+            },
+            "dependsOn": [
+                "setup-env"
+            ]
+        }
+    },
+    "tags": [
+        "type:backend",
+        "language:python"
+    ]
+}

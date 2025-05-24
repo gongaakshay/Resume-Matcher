@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@nx/next": "^21.1.2",
+    "@swc-node/register": "^1.10.10",
+    "@swc/core": "^1.11.29"
+  },
+  "dependencies": {
+    "next": "~15.2.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  }
+}
